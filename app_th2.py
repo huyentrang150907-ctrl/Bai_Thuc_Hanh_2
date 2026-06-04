@@ -11,9 +11,9 @@ st.set_page_config(page_title="Dự đoán kết quả học tập", layout="wid
 st.title("📊 ỨNG DỤNG AI DỰ ĐOÁN & PHÂN TÍCH KẾT QUẢ HỌC TẬP (THANG ĐIỂM 10)")
 
 # --- 1. ĐỌC VÀ CHUẨN HÓA DỮ LIỆU SANG THANG ĐIỂM 10 ---
-path = r"C:\Users\PC\OneDrive\Desktop\student-mat.csv"
+path = r"student-mat.csv"
 try:
-    data = pd.read_csv(path, sep=';')
+    data = pd.read_csv(path, sep=',')
     
     # Đổi các cột điểm G1, G2, G3 từ thang điểm 20 sang thang điểm 10 bằng cách chia cho 2
     data['G1'] = data['G1'] / 2
