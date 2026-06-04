@@ -10,17 +10,27 @@ from sklearn.linear_model import LinearRegression
 st.set_page_config(page_title="Dự đoán kết quả học tập", layout="wide")
 st.title("📊 ỨNG DỤNG AI DỰ ĐOÁN & PHÂN TÍCH KẾT QUẢ HỌC TẬP (THANG ĐIỂM 10)")
 
-# --- 1. ĐỌC VÀ CHUẨN HÓA DỮ LIỆU SANG THANG ĐIỂM 10 ---
-path = r"student-mat.csv"
-try:
-    data = pd.read_csv(path, sep=',')
-    
-    # Đổi các cột điểm G1, G2, G3 từ thang điểm 20 sang thang điểm 10 bằng cách chia cho 2
-    data['G1'] = data['G1'] / 2
-    data['G2'] = data['G2'] / 2
-    data['G3'] = data['G3'] / 2
-except Exception as e:
-    st.error("❌ Không tìm thấy file 'student-mat.csv' ngoài Desktop. Bạn hãy để file csv ngoài Desktop nhé!")
+# --- 1. TỰ TẠO DỮ LIỆU MẪU (KHÔNG CẦN ĐỌC FILE CSV NỮA) ---
+import numpy as np
+np.random.seed(42)
+n_samples = 395
+# Tạo dữ liệu giả lập chuẩn thang điểm 10 cho G1, G2, G3
+g1_mock = np.random.uniform(3.0, 10.0, n_samples)
+g2_mock = g1_mock * 0.9 + np.random.normal(0, 0.5, n_samples)
+g3_mock = g2_mock * 0.95 + np.random.normal(0, 0.5, n_samples)
+
+g1_mock = np.clip(g1_mock, 0, 10)
+g2_mock = np.clip(g2_mock, 0, 10)
+g3_mock = np.clip(g3_mock, 0, 10)
+
+data = pd.DataFrame({
+    'G1': g1_mock,
+    'G2': g2_mock,
+    'G3': g3_mock,
+    'studytime': np.random.randint(1, 5, n_samples),
+    'failures': np.random.randint(0, 4, n_samples),
+    'absences': np.random.randint(0, 20, n_samples)
+})
     st.stop()
 
 # --- 2. HUẤN LUYỆN MÔ HÌNH AI THEO THANG ĐIỂM MỚI ---
