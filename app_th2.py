@@ -31,7 +31,6 @@ data = pd.DataFrame({
     'failures': np.random.randint(0, 4, n_samples),
     'absences': np.random.randint(0, 20, n_samples)
 })
-    st.stop()
 
 # --- 2. HUẤN LUYỆN MÔ HÌNH AI THEO THANG ĐIỂM MỚI ---
 X = data[['G1', 'G2', 'studytime', 'failures']]
