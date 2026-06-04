@@ -59,7 +59,7 @@ with tab1:
 
     st.subheader("2. Biểu đồ xu hướng tương quan điểm số (Thang điểm 10)")
     fig2, ax2 = plt.subplots(figsize=(7, 4))
-    sns.scatterplot(x='G1', y='G3', data=data, hue='sex', alpha=0.7, ax=ax2)
+    sns.scatterplot(x='G1', y='G3', data=data, alpha=0.7, ax=ax2)
     ax2.set_xlabel("Điểm số kỳ 1 (G1)")
     ax2.set_ylabel("Điểm số cuối kỳ (G3)")
     st.pyplot(fig2)
